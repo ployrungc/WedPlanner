@@ -1,7 +1,10 @@
 package chairattanangkul.ployrung.wedplanner;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -45,13 +48,43 @@ public class SignUpActivity extends AppCompatActivity {
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "มีช่องว่าง", "กรุณากรอกทุกช่อง");
 
-        } else {
-            //No Space
+        } else if (checkEmail()) {
+
+            //True email ไม่ซ้ำ
             upLoadValueToServer();
+        } else {
+            // false Email duplicate
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "Email ซ้ำ", emailString + "ซ้ำ ให้เปลี่ยนใหม่");
+
         }
 
 
     }   //clickSignUp
+
+    private boolean checkEmail() {
+
+        boolean bolsult;
+
+        try {
+
+            SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
+                    MODE_PRIVATE, null);
+            Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM userTABLE WHERE Email = " + "'" +emailString + "'", null);
+            cursor.moveToFirst();
+            Log.d("25April", "Email ==> " + cursor.getString(2));
+            bolsult = false;
+
+            bolsult = false;
+
+        } catch (Exception e) {
+            bolsult = true;
+            return true;
+
+        } // try
+        return bolsult;
+
+    }
 
     private void upLoadValueToServer() {
 
