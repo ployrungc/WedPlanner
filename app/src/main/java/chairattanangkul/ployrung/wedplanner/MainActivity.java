@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
 
     }   // Main Method
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        deleteAllSQLite();
+        synJSON();
+    }
+
     //Create Inner Class
     public class MyConnectedUser extends AsyncTask<Void, Void, String> {
         @Override
