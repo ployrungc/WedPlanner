@@ -3,12 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="chairattanangkul.ployrung.wedplanner.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    tools:context="chairattanangkul.ployrung.wedplanner.MainActivity"
+    android:background="@drawable/wall5">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -31,5 +27,33 @@
             android:id="@+id/button2"
             android:layout_weight="1"
             android:onClick="clickSignInMain" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:background="#82ffffff"
+        android:padding="15dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText3"
+            android:hint="@string/email"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText4"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text" />
     </LinearLayout>
 </RelativeLayout>
