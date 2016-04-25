@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
         //Request SQLite
         myManage = new MyManage(this);
 
+        //Test Add Value
+        myManage.addEmail("testEmail", "testPass");
+
     }   // Main Method
 
     public void clickSignUpMain(View view) {
