@@ -2,9 +2,15 @@ package chairattanangkul.ployrung.wedplanner;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +32,49 @@ public class MainActivity extends AppCompatActivity {
         //Delete All SQLite
         deleteAllSQLite();
 
+        //Synchronize JSON to SQLite
+        synJSON();
+
     }   // Main Method
+
+    //Create Inner Class
+    public class MyConnectedUser extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+
+            try {
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+
+                Request.Builder builder = new Request.Builder();
+                Request request = builder.url("http://swiftcodingthai.com/ploy/php_get_email.php").build();
+                Response response = okHttpClient.newCall(request).execute();
+                return response.body().string();
+
+            } catch (Exception e) {
+                Log.d("25April", "errorJSON ==> " + e.toString());
+                return null;
+            }
+
+        }   // DoInBack
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.d("25April", "JSON ==> " + s);
+        }   //onPost
+
+    }   //MyConnected Class
+
+
+
+    private void synJSON() {
+
+        MyConnectedUser myConnectedUser = new MyConnectedUser();
+        myConnectedUser.execute();
+
+
+    }   // synJSON
 
     private void deleteAllSQLite() {
 
