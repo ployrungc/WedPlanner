@@ -159,6 +159,10 @@ public class MainActivity extends AppCompatActivity {
             if (passwordString.equals(resultStrings[2])) {
                 //Password True
                 Toast.makeText(this, "Welcome to my Service", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddWedding.class);
+                intent.putExtra("User", userString);
+                startActivity(intent);
+                finish();
 
             } else {
                 //Password False
