@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void deleteAllSQLite() {
 
+
         SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
                 MODE_PRIVATE, null);
         sqLiteDatabase.delete(MyManage.user_table, null, null);
